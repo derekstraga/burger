@@ -48,14 +48,9 @@ var burger = {
     });
   },
   
-  update: function(table, objColVals, condition, cb) {
-    var queryString = "UPDATE " + table;
-    queryString += " SET ";
-    queryString += objToSql(objColVals);
-    queryString += " WHERE ";
-    queryString += condition;
-    console.log(queryString);
-    connection.query(queryString, function(err, result) {
+  update: function(table,id, cb) {
+      
+    connection.query("update ?? set ??=? where ??=?",[table,"devoured",true,"id",id], function(err, result) {
       if (err) {
         throw err;
       }
