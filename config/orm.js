@@ -1,4 +1,4 @@
-var connection = require("../config/connection.js");
+var connection = require("./connection.js");
 
 function printQuestionMarks(num) {
   var arr = [];
@@ -39,8 +39,8 @@ var burger = {
     });
   },
   create: function(table, cols, vals, cb) {
-    
-    connection.query("insert into ??(??)values(?)", [table, cols, vals], function(err, result) {
+    var queryString = "insert into " + table + " (" + cols.toString() + ") values (" + printQuestionMarks(vals.length) + ")";
+    connection.query(queryString, vals, function(err, result) {
       if (err) {
         throw err;
       }
@@ -48,9 +48,9 @@ var burger = {
     });
   },
   
-  update: function(table,id, cb) {
-      
-    connection.query("update ?? set ??=? where ??=?",[table,"devoured",true,"id",id], function(err, result) {
+  update: function(table,objColVals, condition, cb) {
+    var queryString = "update " + table + " set " + objToSql(objColVals) + " where " + condition;
+    connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
       }

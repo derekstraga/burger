@@ -7,13 +7,14 @@ var burger = {
     });
   },
   // The variables cols and vals are arrays.
-  create: function(cols, cb) {
-    orm.create("burgers", "burger_name", cols, function(res) {
+  create: function(name, cb) {
+    orm.create("burgers", ["burger_name", "devoured"], [name, false], function(res) {
       cb(res);
     });
   },
   update: function(id, cb) {
-    orm.update("burgers", id, function(res) {
+    var condition = "id=" + id;
+    orm.update("burgers", {devoured: true}, condition, function(res) {
       cb(res);
     });
   },
