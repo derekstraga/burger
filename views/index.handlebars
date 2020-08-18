@@ -11,16 +11,16 @@
 
       
       {{#each data_burger}}
-      {{#unless devoured}}
+      {{#unless this.devoured}}
 
       <div class="row">
         <div class="col-md-3 mt-4">
-          {{burger_name}}
+          {{this.burger_name}}
         </div>
         <div class="col-md-1 mr-5">
           <form>
-            <input input type="hidden" class="burger_id" type="text" value={{id}}><br>
-            <button type="button" data-id={{id}} class="btn-default devour-list"> Devour! </button>
+            <input input type="hidden" class="burger_id" type="text" value={{this.id}}><br>
+            <button type="button" data-id={{this.id}} class="btn-default devour-list"> Devour! </button>
           </form>
         </div>
       </div>
@@ -33,8 +33,8 @@
 
       <h2>Burgers devoured</h2>
       {{#each data_burger}}
-      {{#if devoured}}
-      <input class="form-control" type="text" placeholder="{{id}} . {{burger_name}}" readonly>
+      {{#if this.devoured}}
+      <input class="form-control" type="text" placeholder="{{this.id}} . {{this.burger_name}}" readonly>
       {{/if}}
       {{/each}}
     </div>
